@@ -13,6 +13,7 @@ import json
 import os
 import re
 import sqlite3
+import sys
 from datetime import datetime, timezone
 
 from lxml import html as LH
@@ -98,13 +99,20 @@ def main():
                  "runtime presence not yet captured."))
             n_native += 1
 
-    # ---- evidence seed from the kit (source-history records; availability left unknown) ----
+    # ---- evidence seed from the kit (source-history records; REQUIRED) ----
+    # The kit zip is not publicly distributed. Without it this build loses the
+    # source-history evidence (release-note IDs that availability rows reference via FK)
+    # and the ten seed feature rows -> downstream evidence corrections fail.
     seed = os.path.join(BASE, "_kit", "lumerical_compat_backport_kit", "schema", "evidence_seed.sql")
-    if os.path.exists(seed):
-        con.executescript(open(seed, encoding="utf-8").read())
-    else:
-        # the external kit zip is optional; the registry works without source-history rows
-        print("note: kit evidence_seed.sql not found at %s - skipping seed" % seed)
+    if not os.path.exists(seed):
+        sys.exit(
+            "FATAL: kit evidence seed not found at %s\n"
+            "  The registry build REQUIRES the compatibility backport kit (not publicly\n"
+            "  distributed). Place the kit at:\n"
+            "      _kit/lumerical_compat_backport_kit/   (schema/, tasks/, docs/, templates/)\n"
+            "  Missing it would silently drop the source-history evidence rows\n"
+            "  (ansys.sort / ansys.findresonances / release-note sources) that\n"
+            "  feature_availability foreign keys reference." % seed)
 
     # ---- documentation-gap corrections (NOT runtime claims) ----
     # sort/findresonances/modeoverlap were introduced BEFORE 2024 R1 (2018a R6 / 2019a /

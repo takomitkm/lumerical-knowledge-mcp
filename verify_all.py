@@ -57,6 +57,7 @@ def r1_local_files():
         "tests/test_compat_registry.py", "tests/test_compat_api.py",
         "PLAN.md", "COMPAT_INTEGRATION_MAP.md",
         "_kit/lumerical_compat_backport_kit/tasks/PHASE_PLAN.md",
+        "_kit/lumerical_compat_backport_kit/schema/evidence_seed.sql",
     ]
     missing = [p for p in need if not os.path.exists(os.path.join(BASE, p))]
     return not missing, ("all %d present" % len(need)) if not missing else "missing: %s" % missing

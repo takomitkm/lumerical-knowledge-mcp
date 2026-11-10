@@ -69,7 +69,10 @@ ARCHITECTURE_AND_TESTS.md  full architecture + test record
 
 - Corpus data (Ansys KB pages, v241 docs.json, .lsf examples) is **not included** — build
   it with `crawl_zendesk.py` / `build_v241.py` from your own installation.
-- `_kit` (the original SOP this implements) is not redistributed; the methodology is
-  documented in `ARCHITECTURE_AND_TESTS.md`.
+- `_kit` (the original SOP this implements) is not redistributed **but is a required build
+  input**: `build_compat_registry.py` exits with an error if
+  `_kit/lumerical_compat_backport_kit/` is absent — its evidence seed carries the
+  source-history rows (release-note sources) that availability rows reference via foreign
+  keys. The methodology is summarized in `ARCHITECTURE_AND_TESTS.md`.
 - Requires: Python 3.11+, `fastapi uvicorn httpx tantivy "mcp>=1.2,<2"`, a Qdrant
   instance, and SiliconFlow (or any OpenAI-compatible) embedding/rerank endpoint.
