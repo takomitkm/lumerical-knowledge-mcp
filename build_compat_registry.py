@@ -100,7 +100,11 @@ def main():
 
     # ---- evidence seed from the kit (source-history records; availability left unknown) ----
     seed = os.path.join(BASE, "_kit", "lumerical_compat_backport_kit", "schema", "evidence_seed.sql")
-    con.executescript(open(seed, encoding="utf-8").read())
+    if os.path.exists(seed):
+        con.executescript(open(seed, encoding="utf-8").read())
+    else:
+        # the external kit zip is optional; the registry works without source-history rows
+        print("note: kit evidence_seed.sql not found at %s - skipping seed" % seed)
 
     # ---- documentation-gap corrections (NOT runtime claims) ----
     # sort/findresonances/modeoverlap were introduced BEFORE 2024 R1 (2018a R6 / 2019a /

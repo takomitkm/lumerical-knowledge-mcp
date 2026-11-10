@@ -250,8 +250,8 @@ ingest 3 块 → `{"inserted":3}`;`search?q=how to set mesh accuracy` → 正确
 
 ## 6e. 兼容层 v2(kit 规范版,2026-11-11)
 
-依据 `S:\Downloads\lumerical_compat_backport_kit.zip`(AGENT_BRIEF + PHASE_PLAN + schema + 模板),
-**仍是 3 进程,无新端口**。集成点图:`COMPAT_INTEGRATION_MAP.md`;备份:`compat/backups/20261110-043404`。
+依据外部方法论文档 kit(AGENT_BRIEF + PHASE_PLAN + schema + 模板;未随本仓库分发,方法论已并入
+`ARCHITECTURE_AND_TESTS.md`),**仍是 3 进程,无新端口**。集成点图:`COMPAT_INTEGRATION_MAP.md`。
 
 ### 已实现
 - **SQLite 10 表**(kit `schema/compatibility.sql`,v1):`shim/compat/{schema.sql,db.py,repo.py,api.py}`;
