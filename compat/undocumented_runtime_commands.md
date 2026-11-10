@@ -51,3 +51,26 @@
 - `getassertresults` 是本次最大的意外收获:它把 LSF 会话的**错误缓冲**暴露出来,以后写探针可以主动读取它来判断失败原因(比 lumapi 的 'Failed to evaluate code' 详细得多)。
 - `getlicenseversion` 返回 build 号,可以写进 capability snapshot 的 environment.json,替代手工填的 build 号。
 - `getobjectlist` 只列顶层——之前"枚举对象树"的需求它解决不了,仍然是靠 `getnamednumber` 逐名探测。
+
+## 全网搜索核对(2026-11-11,17 条逐一 web 检索)
+
+| 命令 | 网上可搜到? | 结论 |
+|---|---|---|
+| `getassertresults` | ❌ 全网零 Lumerical 痕迹 | 真·未记录(CML QA 内部) |
+| `getobjectlist` | ❌ | 真·未记录 |
+| `addstack` | ❌ | 真·未记录 |
+| `addrcwafieldmonitor` | ✅ **Ansys 官员承认未文档化** | innovationspace 论坛 2024-08:官方回复"该命令还没写文档,你可以直接用 addrcwafieldmonitor()"——`未文档化但真实`的实锤案例 |
+| `encryptprocess` | ❌(有文档的是 encryptscript) | 真·未记录 |
+| `exportassertasjunit` | ❌ | 真·未记录 |
+| `gdsaddellipse` | ❌ | 真·未记录 |
+| `gdsaddmultipoly` | ✅ 有完整官方文章 | **语料快照漏了**(文章 28229279087891,在线 Alphabetical 列表已收录) |
+| `getasapdata` | ✅ 列表标记 (deprecated) | 弃用存根,无正文 |
+| `getmeshfaces` | ❌ | 真·未记录 |
+| `topoparamstogradient` | ✅ 官方 API 页**点名** | lumopt 内部辅助函数,官方明说"不建议直接用,签名会变" |
+| `topoparamstoindex` | ✅ 同上 | 同上;Ansys 官员拒绝公开源码 |
+| `topoparamstominfeaturesizegradient` | ❌(只有竞品 SimWorks 用近似名) | 真·未记录 |
+| `topoparamstominfeaturesizeindicator` | ❌ 同上 | 真·未记录 |
+| `new2d` / `new3d` | ✅ 列表标记 (deprecated) | 弃用存根 |
+| `getid` | ❌ | 真·未记录 |
+
+**修正统计**:24 条"未记录"中——8 条是语料快照漏页(在线文档有)、5 条弃用存根/官方点名(有公开痕迹但无正文)、**11 条全网零公开痕迹**(getassertresults / getobjectlist / addstack / encryptprocess / exportassertasjunit / gdsaddellipse / getmeshfaces / topoparamstominfeaturesizegradient / topoparamstominfeaturesizeindicator / getid,及 addrcwafieldmonitor——它有官方"承认存在"的论坛帖但无文档页)。
