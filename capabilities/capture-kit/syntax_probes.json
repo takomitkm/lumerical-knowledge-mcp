@@ -1,0 +1,89 @@
+{
+  "snapshot_id": "snapshot.lumerical-2024r1-school.20261111T000000Z",
+  "probes": [
+    {
+      "probe_id": "probe.function.v241",
+      "symbol": "function",
+      "symbol_type": "keyword",
+      "probe_kind": "syntax_probe",
+      "probe_file": "probe_function.lsf",
+      "status": "not_run",
+      "result": null,
+      "error_text": null,
+      "captured_at": null,
+      "notes": "One construct per probe file. Do not infer from getcommands."
+    },
+    {
+      "probe_id": "probe.while.v241",
+      "symbol": "while",
+      "symbol_type": "keyword",
+      "probe_kind": "syntax_probe",
+      "probe_file": "probe_while.lsf",
+      "status": "not_run",
+      "result": null,
+      "error_text": null,
+      "captured_at": null,
+      "notes": "One construct per probe file. Do not infer from getcommands."
+    },
+    {
+      "probe_id": "probe.print.v241",
+      "symbol": "print",
+      "symbol_type": "keyword",
+      "probe_kind": "syntax_probe",
+      "probe_file": "probe_print.lsf",
+      "status": "not_run",
+      "result": null,
+      "error_text": null,
+      "captured_at": null,
+      "notes": "One construct per probe file. Do not infer from getcommands."
+    },
+    {
+      "probe_id": "probe.else.v241",
+      "symbol": "else",
+      "symbol_type": "keyword",
+      "probe_kind": "syntax_probe",
+      "probe_file": "probe_else.lsf",
+      "status": "not_run",
+      "result": null,
+      "error_text": null,
+      "captured_at": null,
+      "notes": "One construct per probe file. Do not infer from getcommands."
+    },
+    {
+      "probe_id": "probe.elseif.v241",
+      "symbol": "elseif",
+      "symbol_type": "keyword",
+      "probe_kind": "syntax_probe",
+      "probe_file": "probe_elseif.lsf",
+      "status": "not_run",
+      "result": null,
+      "error_text": null,
+      "captured_at": null,
+      "notes": "One construct per probe file. Do not infer from getcommands."
+    },
+    {
+      "probe_id": "probe.continue.v241",
+      "symbol": "continue",
+      "symbol_type": "keyword",
+      "probe_kind": "syntax_probe",
+      "probe_file": "probe_continue.lsf",
+      "status": "not_run",
+      "result": null,
+      "error_text": null,
+      "captured_at": null,
+      "notes": "One construct per probe file. Do not infer from getcommands."
+    },
+    {
+      "probe_id": "probe.switch.v241",
+      "symbol": "switch",
+      "symbol_type": "keyword",
+      "probe_kind": "syntax_probe",
+      "probe_file": "probe_switch.lsf",
+      "status": "not_run",
+      "result": null,
+      "error_text": null,
+      "captured_at": null,
+      "notes": "One construct per probe file. Do not infer from getcommands."
+    }
+  ]
+}

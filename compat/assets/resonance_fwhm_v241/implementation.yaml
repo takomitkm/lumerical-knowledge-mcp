@@ -1,0 +1,77 @@
+# Authoring template only. Runtime mapping/status belongs in SQLite.
+implementation_id: "compat.resonance_fwhm.v241.fwhm"
+feature:
+  feature_id: "feat:findresonances"
+  canonical_name: "findresonances"
+target:
+  product: "Lumerical"
+  solver: "shared"
+  version_label: "2024 R1"
+  update_label: null
+  build_number: "v241"
+  target_id: "lumerical-2024r1-school-capture"
+implementation:
+  kind: "workaround"
+  recipe_doc_id: "compat.resonance_fwhm.v241.fwhm"
+  source_file: "implementation.lsf"
+  equivalence: "approximate"
+  verification_level: "L2"
+  status: "runtime_verified"
+contract:
+  purpose: "Peak positions plus FWHM-based Q from a spectral dataset; partial emulation of findresonances."
+  inputs:
+    - "ds: dataset with .lambda and .T (from getresult/getsweepresult)"
+    - "nmax: int, max peaks reported (default 5)"
+    - "prom_frac: float, peak height threshold vs max (default 0.05)"
+  outputs:
+    - "res_lambda"
+    - "res_T"
+    - "res_FWHM"
+    - "res_Q"
+  units: "wavelength in metres; Q dimensionless"
+  coordinate_conventions: "1-D ascending wavelength axis"
+  normalization: "magnitude normalised by max(abs(T))"
+  error_and_empty_input_behavior: "unbracketed peak yields FWHM=0 and Q=0; never NaN"
+preconditions:
+  - "ds exposes .lambda and .T"
+  - "resonances are isolated and Lorentzian-like within the peak neighbourhood"
+assumptions:
+  - "half-maximum width is an acceptable Q proxy for this analysis"
+dependencies:
+  - { name: "getresult", type: "dataset_api", required: true, target_presence: "present", evidence: ["docs-json-v241"] }
+  - { name: "pinch", type: "command", required: true, target_presence: "present", evidence: ["docs-json-v241"] }
+  - { name: "abs", type: "command", required: true, target_presence: "present", evidence: ["docs-json-v241"] }
+  - { name: "max", type: "command", required: true, target_presence: "present", evidence: ["docs-json-v241"] }
+  - { name: "length", type: "command", required: true, target_presence: "present", evidence: ["docs-json-v241"] }
+  - { name: "findpeaks", type: "command", required: true, target_presence: "present", evidence: ["docs-json-v241"] }
+  - { name: "matrix", type: "command", required: true, target_presence: "present", evidence: ["docs-json-v241"] }
+  - { name: "num2str", type: "command", required: true, target_presence: "present", evidence: ["docs-json-v241"] }
+  - { name: "if", type: "keyword", required: true, target_presence: "present", evidence: ["docs-json-v241"] }
+  - { name: "for", type: "keyword", required: true, target_presence: "present", evidence: ["docs-json-v241"] }
+  - { name: "break", type: "keyword", required: true, target_presence: "present", evidence: ["docs-json-v241"] }
+algorithm:
+  summary: "normalise magnitude -> findpeaks -> half-maximum bracket scan -> two-point interpolation -> FWHM and Q"
+  invariants:
+    - "FWHM >= 0"
+    - "Q > 0 only when both half-maximum brackets exist"
+  complexity: "O(n_pts * npk)"
+limitations:
+  - "no decay constant, amplitude or phase output"
+  - "requires a spectral dataset, not a raw time trace"
+  - "invalid for overlapping or non-Lorentzian resonances"
+  - "findpeaks(y,n) returns the largest peaks; small resonances may be missed"
+tests:
+  test_suite_id: "tests.findresonances.v241"
+  runtime_verified: false
+  differential_verified: false
+  fixtures: []
+  tolerances:
+    absolute: null
+    relative: null
+sources:
+  - source_id: "kb-findresonances"
+    url: "https://optics.ansys.com/hc/en-us/articles/360034925953-findresonances-Script-command"
+  - source_id: "docs-json-v241"
+    url: null
+notes: "IMPORTANT: findresonances is natively present at 2024 R1 runtime (getcommands capture); try the native command first. Recipe validated to L2 on its declared domain (isolated Lorentzian, df<<FWHM, POWER-spectrum input) by analytic + native-differential runs (gap 2.5e-7); domain limits documented in recipe/limitations."
+

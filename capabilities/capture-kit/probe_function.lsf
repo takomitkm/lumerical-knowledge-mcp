@@ -1,0 +1,2 @@
+myfn = function(x) { return x*2; }
+?myfn(3);

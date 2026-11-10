@@ -1,0 +1,31 @@
+# compat.reportmeshstatistics.v241.adapter
+# Mesh statistics adapter for Lumerical 2024 R1 (FDTD rectilinear mesh).
+#   Equivalence: partial   Verification: L2
+# v241 note: nx/ny/nz/dx/dy/dz on the FDTD object are MESH-OVERRIDE parameters (defaults 1/1e-7);
+# the ACTUAL grid lives in "mesh cells x/y/z". Steps are derived: step = span / cells.
+# =============================================================================
+select("FDTD");
+
+cx = get("mesh cells x");
+cy = get("mesh cells y");
+cz = get("mesh cells z");
+xr = get("x span");
+yr = get("y span");
+zr = get("z span");
+
+stats = struct;
+stats.nx = cx;
+stats.ny = cy;
+stats.nz = cz;
+stats.total_cells = cx*cy*cz;
+stats.dx = xr/cx;
+stats.dy = yr/cy;
+stats.dz = zr/cz;
+stats.x_span = xr;
+stats.y_span = yr;
+stats.z_span = zr;
+stats.resolution = 1/min(stats.dx, stats.dy, stats.dz);  # finest step metric (1/m)
+
+?"mesh stats: cells=" + num2str(cx) + "x" + num2str(cy) + "x" + num2str(cz)
+  + " total=" + num2str(cx*cy*cz)
+  + " dx=" + num2str(stats.dx) + " dy=" + num2str(stats.dy) + " dz=" + num2str(stats.dz);

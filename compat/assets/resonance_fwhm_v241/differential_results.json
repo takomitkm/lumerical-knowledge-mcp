@@ -1,0 +1,28 @@
+{
+  "validated_at": "2026-11-10T20:05:00Z",
+  "rows": [
+    {
+      "reference": "R1-analytic",
+      "Q_true": 500.0,
+      "Q_recipe": 499.99941998345116,
+      "rel_error": 1.1600330976762053e-06,
+      "tolerance_rel": 0.0012293239014624848,
+      "pass": true,
+      "notes": "Lorentzian lambda0=1550nm Q=500, 20001 samples over +-6 FWHM"
+    },
+    {
+      "reference": "R3-native-findresonances",
+      "f0_true": 193414489032258.06,
+      "f0_native": 193414489032258.03,
+      "f0_rel_error": 1.615701086116049e-16,
+      "Q_true": 500.0,
+      "Q_native": 499.9999999844486,
+      "Q_native_rel_error": 3.110278612439288e-11,
+      "Q_recipe_fwhm": 499.99987577322634,
+      "Q_recipe_rel_error": 2.484535473286087e-07,
+      "gap_recipe_vs_native": 2.484224445502109e-07,
+      "native_error_estimate": 1.5462011991348608e-14,
+      "notes": "same synthetic decaying cosine; native harmonic inversion vs FWHM recipe"
+    }
+  ]
+}

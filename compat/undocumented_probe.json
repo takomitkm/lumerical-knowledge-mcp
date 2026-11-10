@@ -1,0 +1,173 @@
+{
+  "probed_at": "2026-11-11T070000Z",
+  "rows": [
+    {
+      "command": "getobjectlist",
+      "call": "r = getobjectlist;",
+      "status": "callable",
+      "result": "['::model::']",
+      "error": null,
+      "captured_at": "2026-11-11T070000Z"
+    },
+    {
+      "command": "getlicenseversion",
+      "call": "r = getlicenseversion;",
+      "status": "callable",
+      "result": "2024.0104",
+      "error": null,
+      "captured_at": "2026-11-11T070000Z"
+    },
+    {
+      "command": "getglobal",
+      "call": "setglobal(\"probe_key\", 123); r = getglobal(\"probe_key\");",
+      "status": "error",
+      "result": null,
+      "error": "'Failed to evaluate code'",
+      "captured_at": "2026-11-11T070000Z"
+    },
+    {
+      "command": "setglobal",
+      "call": "setglobal(\"probe_key2\", 4.5); r = getglobal(\"probe_key2\");",
+      "status": "error",
+      "result": null,
+      "error": "'Failed to evaluate code'",
+      "captured_at": "2026-11-11T070000Z"
+    },
+    {
+      "command": "getmeshfaces",
+      "call": "r = getmeshfaces;",
+      "status": "error",
+      "result": null,
+      "error": "'Failed to evaluate code'",
+      "captured_at": "2026-11-11T070000Z"
+    },
+    {
+      "command": "getasapdata",
+      "call": "r = getasapdata;",
+      "status": "error",
+      "result": null,
+      "error": "'Failed to evaluate code'",
+      "captured_at": "2026-11-11T070000Z"
+    },
+    {
+      "command": "getassertresults",
+      "call": "r = getassertresults;",
+      "status": "callable",
+      "result": "[{'buffer': 'prompt', 'file': 'prompt', 'line': '1', 'message': '?setglobal command is obsolete, please use setglobalsource or setglobalmonitor instead.', 'result': 'error'}, {'buffer': 'prompt', 'fil",
+      "error": null,
+      "captured_at": "2026-11-11T070000Z"
+    },
+    {
+      "command": "querynamed",
+      "call": "r = querynamed(\"monitor\");",
+      "status": "error",
+      "result": null,
+      "error": "'Failed to evaluate code'",
+      "captured_at": "2026-11-11T070000Z"
+    },
+    {
+      "command": "queryanalysisresult",
+      "call": "r = queryanalysisresult;",
+      "status": "callable",
+      "result": "[]",
+      "error": null,
+      "captured_at": "2026-11-11T070000Z"
+    },
+    {
+      "command": "addstack",
+      "call": "addstack;",
+      "status": "callable",
+      "result": "[]",
+      "error": null,
+      "captured_at": "2026-11-11T070000Z"
+    },
+    {
+      "command": "addrcwafieldmonitor",
+      "call": "addrcwafieldmonitor;",
+      "status": "callable",
+      "result": "[]",
+      "error": null,
+      "captured_at": "2026-11-11T070000Z"
+    },
+    {
+      "command": "gdsaddellipse",
+      "call": "r = gdsaddellipse;",
+      "status": "error",
+      "result": null,
+      "error": "'Failed to evaluate code'",
+      "captured_at": "2026-11-11T070000Z"
+    },
+    {
+      "command": "gdsaddmultipoly",
+      "call": "r = gdsaddmultipoly;",
+      "status": "error",
+      "result": null,
+      "error": "'Failed to evaluate code'",
+      "captured_at": "2026-11-11T070000Z"
+    },
+    {
+      "command": "h5write",
+      "call": "r = h5write;",
+      "status": "error",
+      "result": null,
+      "error": "'Failed to evaluate code'",
+      "captured_at": "2026-11-11T070000Z"
+    },
+    {
+      "command": "h5writeattr",
+      "call": "r = h5writeattr;",
+      "status": "error",
+      "result": null,
+      "error": "'Failed to evaluate code'",
+      "captured_at": "2026-11-11T070000Z"
+    },
+    {
+      "command": "showdata",
+      "call": "r = showdata;",
+      "status": "error",
+      "result": null,
+      "error": "'Failed to evaluate code'",
+      "captured_at": "2026-11-11T070000Z"
+    },
+    {
+      "command": "setmemorycheck",
+      "call": "setmemorycheck(1); r = 1;",
+      "status": "callable",
+      "result": "1.0",
+      "error": null,
+      "captured_at": "2026-11-11T070000Z"
+    },
+    {
+      "command": "setparallel",
+      "call": "r = setparallel;",
+      "status": "callable",
+      "result": null,
+      "error": null,
+      "captured_at": "2026-11-11T070000Z"
+    },
+    {
+      "command": "encryptprocess",
+      "call": "r = encryptprocess;",
+      "status": "error",
+      "result": null,
+      "error": "'Failed to evaluate code'",
+      "captured_at": "2026-11-11T070000Z"
+    },
+    {
+      "command": "exportassertasjunit",
+      "call": "r = exportassertasjunit;",
+      "status": "error",
+      "result": null,
+      "error": "'Failed to evaluate code'",
+      "captured_at": "2026-11-11T070000Z"
+    },
+    {
+      "command": "topoparamstoindex",
+      "call": "r = topoparamstoindex;",
+      "status": "error",
+      "result": null,
+      "error": "'Failed to evaluate code'",
+      "captured_at": "2026-11-11T070000Z"
+    }
+  ]
+}

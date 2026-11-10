@@ -1,0 +1,31 @@
+{
+  "A1_sets": {
+    "x span": "ok",
+    "y span": "ok",
+    "z span": "skipped: 'Failed to evaluate code'",
+    "frequency points": "skipped: 'Failed to evaluate code'"
+  },
+  "A1_fields": {
+    "lambda": "missing",
+    "f": "(5, 1)",
+    "Ex": "(1, 71, 1, 5)",
+    "Ey": "(1, 71, 1, 5)",
+    "Ez": "(1, 71, 1, 5)"
+  },
+  "A2_mesh": {
+    "nx": 1.0,
+    "ny": 1.0,
+    "nz": 1.0,
+    "dx": 1e-07,
+    "dy": 1e-07,
+    "dz": 1e-07,
+    "total_cells": 1.0,
+    "spans_m": [
+      1.6e-05,
+      6e-06,
+      1.6999999999999998e-06
+    ],
+    "consistency_pass": false
+  },
+  "A1_named": "None"
+}

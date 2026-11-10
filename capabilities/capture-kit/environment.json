@@ -1,0 +1,13 @@
+{
+  "target_id": "lumerical-2024r1-school-capture",
+  "product": "Lumerical",
+  "solver": "shared",
+  "version_label": "2024 R1",
+  "update_label": null,
+  "build_number": "v241",
+  "platform": null,
+  "captured_at": null,
+  "capture_method": "manual_target_runtime",
+  "license_available_for_test": null,
+  "notes": "Fill platform/captured_at during capture. Do not include license keys, usernames, private hostnames or tokens."
+}

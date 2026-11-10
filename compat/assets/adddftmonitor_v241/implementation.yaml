@@ -1,0 +1,55 @@
+# Authoring template only. Runtime mapping/status belongs in SQLite.
+implementation_id: "compat.adddftmonitor.v241.adapter"
+feature:
+  feature_id: "feat:adddftmonitor"
+  canonical_name: "adddftmonitor"
+target:
+  product: "Lumerical"
+  solver: "FDTD"
+  version_label: "2024 R1"
+  update_label: null
+  build_number: "v241 (runtime 8.31.3633)"
+  target_id: "lumerical-2024r1-school-capture"
+implementation:
+  kind: "adapter"
+  recipe_doc_id: "compat.adddftmonitor.v241.adapter"
+  source_file: "implementation.lsf"
+  equivalence: "domain_equivalent"
+  verification_level: "L2"
+  status: "runtime_verified"
+contract:
+  purpose: "Add a frequency-domain field monitor on 2024 R1 via addpower, mapping the newer command's struct interface."
+  inputs:
+    - "struct_data: optional struct (name, position, spans, frequency points, spatial interpolation, monitor type)"
+  outputs:
+    - "monitor object (selected)"
+  units: "SI (metres)"
+  coordinate_conventions: "identical to v241 monitor properties"
+  normalization: "n/a"
+  error_and_empty_input_behavior: "unknown struct keys skipped with console note; never fatal"
+preconditions:
+  - "v241 FDTD, layout mode"
+assumptions: []
+dependencies:
+  - { name: "addpower", type: "command", required: true, target_presence: "present", evidence: ["snapshot.lumerical-2024r1-school.20261110T182355Z"] }
+  - { name: "set", type: "command", required: true, target_presence: "present", evidence: ["snapshot.lumerical-2024r1-school.20261110T182355Z"] }
+  - { name: "struct", type: "builtin_function", required: true, target_presence: "present", evidence: ["snapshot.lumerical-2024r1-school.20261110T182355Z"] }
+algorithm:
+  summary: "addpower + 1:1 property mapping from the newer struct keys"
+  invariants: ["resulting object is the v241 freq-domain field monitor"]
+  complexity: "O(1)"
+limitations:
+  - "FDTD solver only"
+  - "struct keys outside the mapping table are skipped"
+tests:
+  test_suite_id: "tests.adddftmonitor.v241"
+  runtime_verified: false
+  differential_verified: false
+  fixtures: []
+  tolerances: { absolute: null, relative: null }
+sources:
+  - source_id: "kb-adddftmonitor"
+    url: "https://optics.ansys.com/hc/en-us"
+  - source_id: "runtime-snapshot.lumerical-2024r1-school.20261110T182355Z"
+    url: null
+notes: "Validated on the fpcavity.fsp project at 2024 R1 (8.31.3633): monitor added, named, fields present after run."

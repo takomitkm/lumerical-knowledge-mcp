@@ -1,0 +1,20 @@
+# compat.median.sort.v241.exact
+# Exact median on Lumerical 2024 R1 via native sort.
+#   Equivalence: exact          Verification: L1 (static) - runtime fixtures pending
+#
+# Runtime evidence (snapshot.lumerical-2024r1-school.20261110T182355Z):
+#   median is ABSENT (not in getcommands, invocation fails), sort IS native.
+#
+# INPUT:  xv = real finite vector, e.g. xv = [-3, 5, -1];
+# OUTPUT: med = median of xv
+# =============================================================================
+
+xs = pinch(sort(pinch(xv)));       # ascending; pinch twice: sort may keep shape
+n   = length(xs);
+
+if (mod(n, 2) == 1) {
+    med = xs((n+1)/2);
+} else {
+    med = (xs(n/2) + xs(n/2+1)) / 2;
+}
+?"median = " + num2str(med);

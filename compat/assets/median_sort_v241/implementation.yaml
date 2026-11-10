@@ -1,0 +1,68 @@
+# Authoring template only. Runtime mapping/status belongs in SQLite.
+implementation_id: "compat.median.sort.v241.exact"
+feature:
+  feature_id: "feat:median"
+  canonical_name: "median"
+target:
+  product: "Lumerical"
+  solver: "shared"
+  version_label: "2024 R1"
+  update_label: null
+  build_number: "v241 (runtime 8.31.3633)"
+  target_id: "lumerical-2024r1-school-capture"
+implementation:
+  kind: "backport"
+  recipe_doc_id: "compat.median.sort.v241.exact"
+  source_file: "implementation.lsf"
+  equivalence: "exact"
+  verification_level: "L2"
+  status: "runtime_verified"
+contract:
+  purpose: "Exact median for real vectors on 2024 R1 via native sort (median is absent at this release)."
+  inputs:
+    - "xv: real finite vector"
+  outputs:
+    - "med: scalar median"
+  units: "same as input"
+  coordinate_conventions: "n/a"
+  normalization: "n/a"
+  error_and_empty_input_behavior: "non-finite/complex inputs outside documented domain, unsupported"
+preconditions:
+  - "xv is a real, finite vector (official median domain)"
+assumptions: []
+dependencies:
+  - { name: "pinch", type: "command", required: true, target_presence: "present", evidence: ["snapshot.lumerical-2024r1-school.20261110T182355Z"] }
+  - { name: "sort", type: "command", required: true, target_presence: "present", evidence: ["snapshot.lumerical-2024r1-school.20261110T182355Z"] }
+  - { name: "length", type: "command", required: true, target_presence: "present", evidence: ["snapshot.lumerical-2024r1-school.20261110T182355Z"] }
+  - { name: "mod", type: "command", required: true, target_presence: "present", evidence: ["docs-json-v241"] }
+  - { name: "if", type: "keyword", required: true, target_presence: "present", evidence: ["snapshot.lumerical-2024r1-school.20261110T182355Z"] }
+  - { name: "else", type: "keyword", required: true, target_presence: "present", evidence: ["snapshot.lumerical-2024r1-school.20261110T182355Z"] }
+  - { name: "num2str", type: "command", required: true, target_presence: "present", evidence: ["docs-json-v241"] }
+algorithm:
+  summary: "sort ascending; odd n -> middle element, even n -> mean of two middle elements"
+  invariants:
+    - "min(xv) <= med <= max(xv)"
+    - "med equals an input element when n is odd"
+  complexity: "O(n log n)"
+limitations:
+  - "real vectors only (official median domain)"
+  - "non-finite inputs unsupported"
+tests:
+  test_suite_id: "tests.median.v241"
+  runtime_verified: false
+  differential_verified: false
+  fixtures:
+    - "xv=[1,2,4] -> med=2"
+    - "xv=[1,2,3,4] -> med=2.5"
+    - "xv=[7] -> med=7"
+    - "xv=[-3,5,-1] -> med=-1"
+  tolerances:
+    absolute: 0
+    relative: 0
+sources:
+  - source_id: "kb-median"
+    url: "https://optics.ansys.com/hc/en-us/articles/360034926513-median-Script-command"
+  - source_id: "runtime-snapshot.lumerical-2024r1-school.20261110T182355Z"
+    url: null
+notes: "Runtime fixtures protocol documented in recipe.md; exact-equality pass promotes to L2."
+

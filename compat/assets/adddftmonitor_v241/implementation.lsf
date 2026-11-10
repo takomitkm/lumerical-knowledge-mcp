@@ -1,0 +1,32 @@
+# compat.adddftmonitor.v241.adapter
+# Adapter for the newer `adddftmonitor` command on Lumerical 2024 R1 (FDTD).
+#   Equivalence: domain_equivalent   Verification: L2
+#
+# v241 equivalent: addpower (frequency-domain field profile monitor; the DFT over the
+# simulation window is built in). Property names match the newer struct keys 1:1.
+#
+# INPUT:  struct_data = struct with optional keys:
+#           name, x, y, z, x span, y span, z span, frequency points,
+#           spatial interpolation, monitor type
+#         (empty struct -> all defaults)
+# OUTPUT: a monitor named per input; selected afterwards.
+# =============================================================================
+
+if (struct_data == 0) { struct_data = struct; }
+
+addpower;
+mon_name = "monitor";
+try { mon_name = struct_data.name; } catch(0);
+
+set("name", mon_name);
+
+# property map: new-key -> v241 property (identical names on v241)
+keys = ["x","y","z","x span","y span","z span","frequency points","spatial interpolation","monitor type"];
+for (k = 1:length(keys)) {
+    key = keys(k);
+    try {
+        v = struct_data.key;
+        set(key, v);
+    } catch(0);   # missing key -> keep default; bad value -> console note, not fatal
+}
+?"adddftmonitor adapter: monitor '" + mon_name + "' added.";

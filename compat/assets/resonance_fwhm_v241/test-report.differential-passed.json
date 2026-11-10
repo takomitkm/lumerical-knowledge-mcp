@@ -1,0 +1,34 @@
+{
+  "validation_run_id": "validation.compat.resonance_fwhm.v241.fwhm.20261110T200600Z",
+  "implementation_id": "compat.resonance_fwhm.v241.fwhm",
+  "target_id": "lumerical-2024r1-school-capture",
+  "test_suite_id": "tests.findresonances.v241",
+  "test_method": "differential",
+  "result": "passed",
+  "run_at": "2026-11-10T20:06:00Z",
+  "runner": "run_validation.py via lumapi FDTD session (build 8.31.3633)",
+  "execution_context": "lumapi eval, hidden session; synthetic signal, no CAD objects",
+  "fixtures": [
+    "R1: Lorentzian power spectrum lambda0=1550nm Q=500, 20001 samples over +-6 FWHM",
+    "R3: decaying cosine f0=193.414489THz Q=500, 100000 periods, nfft=2^22 (df/FWHM=0.001)"
+  ],
+  "reference_source": "R1 analytic truth; R3 native findresonances (harmonic inversion)",
+  "metrics": {
+    "absolute_tolerance": null,
+    "relative_tolerance": 0.0012293239014624848,
+    "max_absolute_error": null,
+    "max_relative_error": 0.0011600330976762053
+  },
+  "actual_outputs": [
+    "R1: Q_recipe=499.99942 vs true 500 -> rel err 1.16e-6 <= tol 1.23e-3 PASS",
+    "R3: native f rel err 1.6e-16, native Q rel err 3.1e-11 (error estimate 1.5e-14)",
+    "R3: recipe Q=499.99988 on same signal -> gap vs native 2.48e-7 PASS",
+    "earlier failed runs kept as evidence: amplitude-vs-power spectrum mixup (sqrt(3) bias) and under-resolved FFT (nfft=2^18, df/FWHM=17)"
+  ],
+  "errors": [],
+  "limitations": [
+    "Single-resonance, single-Q regime validated. Overlapping modes and low-Q remain outside the declared domain.",
+    "Native findresonances is natively present at 2024 R1; the recipe is an approximate substitute for workflows that need spectrum-only analysis."
+  ],
+  "notes": "Promotes the resonance_fwhm recipe to L2 for the VALIDATED DOMAIN (isolated Lorentzian, df<<FWHM, power-spectrum input). Equivalence label stays 'approximate substitute'; the differential gap vs native harmonic inversion is 2.5e-7 in this regime but is expected to grow for overlapping/low-Q modes (native docs). Raw outputs: differential_results.json, median_results.json."
+}

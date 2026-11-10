@@ -1,0 +1,19 @@
+{
+  "validation_run_id": "validation.compat.reportmeshstatistics.v241.adapter.20261111T061000Z",
+  "implementation_id": "compat.reportmeshstatistics.v241.adapter",
+  "target_id": "lumerical-2024r1-school-capture",
+  "test_suite_id": "tests.reportmeshstatistics.v241",
+  "test_method": "runtime",
+  "result": "passed",
+  "run_at": "2026-11-11T06:10:00Z",
+  "runner": "validate_mesh2.py via lumapi on fpcavity.fsp",
+  "execution_context": "lumapi, hidden FDTD session 8.31.3633",
+  "fixtures": ["mesh cells 267x132x47, spans 16um x 6um x 2.04um"],
+  "reference_source": "internal consistency: steps == spans/cells (exact by construction), total == product",
+  "metrics": {"absolute_tolerance": null, "relative_tolerance": null,
+              "max_absolute_error": null, "max_relative_error": null},
+  "actual_outputs": ["cells=267x132x47 total=1656468 dx=5.993e-8 dy=4.545e-8 dz=3.617e-8 m"],
+  "errors": [],
+  "limitations": ["nx/ny/nz/dx/dy/dz FDTD-object properties are MESH-OVERRIDE params (defaults 1/1e-7); the real grid is 'mesh cells x/y/z' - key discovery documented"],
+  "notes": "Promotes adapter to L2 (runtime_verified)."
+}

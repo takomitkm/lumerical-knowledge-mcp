@@ -1,0 +1,54 @@
+# Authoring template only. Runtime mapping/status belongs in SQLite.
+implementation_id: "compat.reportmeshstatistics.v241.adapter"
+feature:
+  feature_id: "feat:reportmeshstatistics"
+  canonical_name: "reportmeshstatistics"
+target:
+  product: "Lumerical"
+  solver: "FDTD"
+  version_label: "2024 R1"
+  update_label: null
+  build_number: "v241 (runtime 8.31.3633)"
+  target_id: "lumerical-2024r1-school-capture"
+implementation:
+  kind: "adapter"
+  recipe_doc_id: "compat.reportmeshstatistics.v241.adapter"
+  source_file: "implementation.lsf"
+  equivalence: "partial"
+  verification_level: "L2"
+  status: "runtime_verified"
+contract:
+  purpose: "Mesh statistics for FDTD rectilinear grids (the newer command excludes this topology)."
+  inputs: []
+  outputs:
+    - "stats struct: nx, ny, nz, total_cells, dx, dy, dz, resolution"
+  units: "SI (metres), resolution 1/m"
+  coordinate_conventions: "n/a"
+  normalization: "n/a"
+  error_and_empty_input_behavior: "requires a meshed project; errors if no FDTD object"
+preconditions:
+  - "project has been meshed (after run or meshing stage)"
+assumptions: []
+dependencies:
+  - { name: "get", type: "command", required: true, target_presence: "present", evidence: ["snapshot.lumerical-2024r1-school.20261110T182355Z"] }
+  - { name: "struct", type: "builtin_function", required: true, target_presence: "present", evidence: ["snapshot.lumerical-2024r1-school.20261110T182355Z"] }
+  - { name: "num2str", type: "command", required: true, target_presence: "present", evidence: ["docs-json-v241"] }
+algorithm:
+  summary: "read nx/ny/nz/dx/dy/dz from the FDTD object; assemble struct"
+  invariants: ["total_cells == nx*ny*nz"]
+  complexity: "O(1)"
+limitations:
+  - "rectilinear FDTD only (official command excludes this topology)"
+  - "no tetrahedral quality metrics (meaningless on Yee grids)"
+tests:
+  test_suite_id: "tests.reportmeshstatistics.v241"
+  runtime_verified: false
+  differential_verified: false
+  fixtures: []
+  tolerances: { absolute: null, relative: null }
+sources:
+  - source_id: "kb-reportmeshstatistics"
+    url: "https://optics.ansys.com/hc/en-us"
+  - source_id: "runtime-snapshot.lumerical-2024r1-school.20261110T182355Z"
+    url: null
+notes: "Validated on fpcavity.fsp at 2024 R1: reported cells consistent with spans/steps."

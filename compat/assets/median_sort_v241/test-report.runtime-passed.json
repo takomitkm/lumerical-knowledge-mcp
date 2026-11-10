@@ -1,0 +1,20 @@
+{
+  "validation_run_id": "validation.compat.median.sort.v241.exact.20261110T200500Z",
+  "implementation_id": "compat.median.sort.v241.exact",
+  "target_id": "lumerical-2024r1-school-capture",
+  "test_suite_id": "tests.median.v241",
+  "test_method": "runtime",
+  "result": "passed",
+  "run_at": "2026-11-10T20:05:00Z",
+  "runner": "run_validation.py via lumapi FDTD session (build 8.31.3633)",
+  "execution_context": "lumapi eval, hidden session on the school machine",
+  "fixtures": ["xv=[1,2,4] -> 2", "xv=[1,2,3,4] -> 2.5", "xv=[7] -> 7",
+               "xv=[-3,5,-1] -> -1", "xv=[1.5,2.5,3.5,4.5] -> 3.0"],
+  "reference_source": "order-statistic definition (exact equality, zero tolerance)",
+  "metrics": {"absolute_tolerance": 0, "relative_tolerance": 0,
+              "max_absolute_error": 0, "max_relative_error": 0},
+  "actual_outputs": ["5/5 fixtures exact-equality PASS (see median_results.json)"],
+  "errors": [],
+  "limitations": [],
+  "notes": "Promotes implementation to L2 (runtime_verified). Differential to a second implementation is unnecessary for an order-statistic definition."
+}

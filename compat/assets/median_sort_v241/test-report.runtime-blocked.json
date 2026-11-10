@@ -1,0 +1,19 @@
+{
+  "validation_run_id": "validation.compat.median.sort.v241.exact.20261110T193100Z",
+  "implementation_id": "compat.median.sort.v241.exact",
+  "target_id": "lumerical-2024r1-school-capture",
+  "test_suite_id": "tests.median.v241",
+  "test_method": "runtime",
+  "result": "blocked",
+  "run_at": "2026-11-10T19:31:00Z",
+  "runner": "",
+  "execution_context": "Script Prompt / lumapi eval on 2024 R1 (8.31.3633)",
+  "fixtures": ["xv=[1,2,4] -> 2", "xv=[1,2,3,4] -> 2.5", "xv=[7] -> 7", "xv=[-3,5,-1] -> -1"],
+  "reference_source": "order-statistic definition (exact equality; zero tolerance)",
+  "metrics": {"absolute_tolerance": 0, "relative_tolerance": 0,
+              "max_absolute_error": null, "max_relative_error": null},
+  "actual_outputs": [],
+  "errors": [],
+  "limitations": ["Blocked: capture session closed; fixtures need any licensed 2024 R1 session."],
+  "notes": "Protocol: set xv per fixture, run implementation.lsf, compare med by exact equality. An all-pass run justifies promotion to L2 with zero tolerance."
+}

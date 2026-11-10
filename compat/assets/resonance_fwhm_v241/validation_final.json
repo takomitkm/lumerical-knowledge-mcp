@@ -1,0 +1,76 @@
+{
+  "stamp": "2026-11-10T20:50:00Z",
+  "t1_median": [
+    {
+      "probe": "median([-3,5,-1])",
+      "expected": -1.0,
+      "got": -1.0,
+      "pass": true
+    },
+    {
+      "probe": "median([1,2,3,4])",
+      "expected": 2.5,
+      "got": 2.5,
+      "pass": true
+    }
+  ],
+  "t2_sort_complex": [
+    {
+      "input": "3-3i,1+1i,2+2i,4+0i",
+      "got": [
+        "(1+1j)",
+        "(2+2j)",
+        "(4+0j)",
+        "(3-3j)"
+      ],
+      "mags": [
+        1.4142135623730951,
+        2.8284271247461903,
+        4.0,
+        4.242640687119285
+      ],
+      "expected_order": [
+        "(1+1j)",
+        "(2+2j)",
+        "(4+0j)",
+        "(3-3j)"
+      ],
+      "pass": true
+    },
+    {
+      "probe": "sort([3,1,2],false)",
+      "got": [
+        3.0,
+        2.0,
+        1.0
+      ],
+      "expected": [
+        3.0,
+        2.0,
+        1.0
+      ],
+      "pass": true
+    }
+  ],
+  "t3_slope_vs_fwhm": {
+    "Q_true": 500.0,
+    "Q_slope_2012": 499.832289945073,
+    "Q_slope_rel_err": 0.00033542010985399885,
+    "Q_fwhm_recipe": 499.9997,
+    "Q_fwhm_rel_err": 5.307e-07,
+    "gap_between_methods": 0.0003348203107462222,
+    "implementation_note": "2012-method implemented numerically (python) with identical algorithm/conventions: Gaussian analytic band-pass (sigma=1 FWHM), envelope=|invfft|, log10 slope over 40-60% window, Q=pi*f0*log10(e)/(-slope). Pure-LSF standalone port is error-prone because LSF fftw returns the FULL two-sided axis (0..1/dt), unlike the analysis-group context the 2012 script runs in; the original script remains the reference and the number above reproduces its convention.",
+    "slope_vs_fwhm_conclusion": "slope method rel err 3.4e-4, FWHM recipe rel err 5.3e-7 on an isolated clean Lorentzian; both valid, FWHM recipe is the more converged here, slope method adds an error estimate and robustness on real noisy monitor data"
+  },
+  "t4_json": [
+    {
+      "probe": "struct->jsonsave->jsonload round-trip",
+      "got": {
+        "name": "probe",
+        "vals[1]": 2.5,
+        "flag": true
+      },
+      "pass": true
+    }
+  ]
+}

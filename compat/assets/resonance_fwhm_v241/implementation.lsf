@@ -1,0 +1,75 @@
+# =============================================================================
+# compat.resonance_fwhm.v241.fwhm
+# Partial emulation of the newer `findresonances` command on Lumerical 2024 R1.
+#   Equivalence: partial        Verification: L1 (static only)
+#
+# NOT a harmonic-inversion solver. It reports peak positions and a FWHM-based Q
+# from a spectral dataset. See recipe.md for the full contract and limitations.
+#
+# INPUT (set before running):
+#   ds         dataset with ds.lambda and ds.T  e.g. ds = getresult("monitor","T");
+#   nmax       max peaks to report                (default 5)
+#   prom_frac  peak height threshold vs max      (default 0.05)
+# OUTPUT:
+#   res_lambda, res_T, res_FWHM, res_Q   (1 x N each, N = number of reported peaks)
+# =============================================================================
+
+lam   = pinch(ds.lambda);          # 1-D wavelength axis
+Tmag  = pinch(abs(ds.T));          # 1-D magnitude spectrum
+Tmax  = max(Tmag);
+Tn    = Tmag / Tmax;
+n_pts = length(lam);
+
+nmax      = 5;
+prom_frac = 0.05;
+
+idx = findpeaks(Tn, nmax);         # positions of the largest peaks
+npk = length(idx);
+
+res_lambda = matrix(npk);
+res_T      = matrix(npk);
+res_FWHM   = matrix(npk);
+res_Q      = matrix(npk);
+
+for (k = 1:npk) {
+    p  = idx(k);
+    pk = Tn(p);
+    res_lambda(k) = lam(p);
+    res_T(k)      = Tmag(p);
+
+    if (pk < prom_frac) {
+        res_FWHM(k) = 0;
+        res_Q(k)    = 0;
+    } else {
+        half = pk / 2;
+
+        # left half-maximum bracket (last sample below half)
+        iL = 1;
+        for (i = 1:p) {
+            if (Tn(i) < half) { iL = i; }
+        }
+        # right half-maximum bracket (first sample below half)
+        iR = n_pts;
+        for (i = p:n_pts) {
+            if (Tn(i) < half) { iR = i; break; }
+        }
+
+        # two-point linear interpolation of the half-maximum crossings
+        if (iL >= 1 && iL < p && iR > p && iR <= n_pts) {
+            lamL = lam(iL) + (half - Tn(iL)) * (lam(iL+1) - lam(iL)) / (Tn(iL+1) - Tn(iL));
+            lamR = lam(iR-1) + (half - Tn(iR-1)) * (lam(iR) - lam(iR-1)) / (Tn(iR) - Tn(iR-1));
+            fwhm = abs(lamR - lamL);
+            res_FWHM(k) = fwhm;
+            if (fwhm > 0) { res_Q(k) = lam(p) / fwhm; }
+        } else {
+            res_FWHM(k) = 0;
+            res_Q(k)    = 0;
+        }
+    }
+}
+
+?"=== resonance_fwhm (v241, partial emulation) ===";
+for (k = 1:npk) {
+    ? num2str(res_lambda(k)*1e9) + " nm   FWHM=" + num2str(res_FWHM(k)*1e9) + \
+      " nm   Q=" + num2str(res_Q(k));
+}
