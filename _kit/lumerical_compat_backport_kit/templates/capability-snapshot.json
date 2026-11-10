@@ -1,0 +1,14 @@
+{
+  "snapshot_id": "snapshot.<target-id>.<timestamp>",
+  "target_id": "env.<product>.<solver>.<exact-version>.<build-or-capture-id>",
+  "captured_at": "YYYY-MM-DDTHH:MM:SSZ",
+  "files": {
+    "environment": "environment.json",
+    "commands": "commands.json",
+    "syntax_probes": "syntax_probes.json"
+  },
+  "commands_sha256": null,
+  "snapshot_sha256": null,
+  "capture_method": "manual_target_runtime",
+  "notes": "Immutable evidence snapshot. Create a new snapshot after software updates; do not overwrite old evidence."
+}

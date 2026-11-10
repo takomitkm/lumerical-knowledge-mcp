@@ -1,0 +1,16 @@
+{
+  "snapshot_id": "snapshot.<target-id>.<timestamp>",
+  "source_command": "?getcommands;",
+  "captured_at": "YYYY-MM-DDTHH:MM:SSZ",
+  "raw_output_file": "getcommands_raw.txt",
+  "symbols": [
+    {
+      "name": "sort",
+      "symbol_type": "command",
+      "presence": "present",
+      "evidence_method": "getcommands",
+      "signature_status": "not_tested",
+      "notes": "Command presence alone does not establish supported signatures or semantics."
+    }
+  ]
+}

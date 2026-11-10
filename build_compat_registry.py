@@ -107,12 +107,12 @@ def main():
     if not os.path.exists(seed):
         sys.exit(
             "FATAL: kit evidence seed not found at %s\n"
-            "  The registry build REQUIRES the compatibility backport kit (not publicly\n"
-            "  distributed). Place the kit at:\n"
-            "      _kit/lumerical_compat_backport_kit/   (schema/, tasks/, docs/, templates/)\n"
-            "  Missing it would silently drop the source-history evidence rows\n"
-            "  (ansys.sort / ansys.findresonances / release-note sources) that\n"
-            "  feature_availability foreign keys reference." % seed)
+            "  The kit ships with this repository under _kit/. If it is missing, the\n"
+            "  checkout is incomplete - restore _kit/lumerical_compat_backport_kit/\n"
+            "  (schema/, tasks/, docs/, templates/). Building without the seed would\n"
+            "  silently drop the source-history evidence rows (ansys.sort /\n"
+            "  ansys.findresonances / release-note sources) that feature_availability\n"
+            "  foreign keys reference." % seed)
 
     # ---- documentation-gap corrections (NOT runtime claims) ----
     # sort/findresonances/modeoverlap were introduced BEFORE 2024 R1 (2018a R6 / 2019a /

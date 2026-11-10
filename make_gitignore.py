@@ -10,10 +10,10 @@ import os
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 EXCLUDE_EXT = {".db", ".db-wal", ".db-shm", ".log", ".pyc", ".fsp", ".html"}
-EXCLUDE_DIRNAMES = {"__pycache__", ".pytest_cache", "data", "backups", "corpus", "_kit",
+EXCLUDE_DIRNAMES = {"__pycache__", ".pytest_cache", "data", "backups", "corpus",
                     "v241-recipes", "archive", ".git"}
 # top-level entries NOT whitelisted even if present
-EXCLUDE_TOP = {"corpus", "_kit", "v241-recipes", "archive", ".tmp", ".git"}
+EXCLUDE_TOP = {"corpus", "v241-recipes", "archive", ".tmp", ".git"}
 
 
 def main():
@@ -35,7 +35,9 @@ def main():
             rel = os.path.relpath(os.path.join(dp, f), BASE).replace("\\", "/")
             whitelist.append(rel)
 
-    # deny-all for every directory that contains (or will contain) whitelisted files
+    # deny-all per directory, then re-include the directories on each whitelist path.
+    # git ignores a file if any PARENT DIRECTORY is excluded, so every directory on the
+    # path must be re-included ("!dir/") before the exact file whitelist can take effect.
     dirs = set()
     for rel in whitelist:
         parts = rel.split("/")
@@ -43,6 +45,7 @@ def main():
             dirs.add("/".join(parts[:i]))
     for d in sorted(dirs):
         lines.append("%s/*" % d)
+        lines.append("!/%s/" % d)
 
     lines.append("")
     lines.append("# ---- whitelisted exact paths ----")
@@ -62,7 +65,6 @@ def main():
         "**/*.fsp",
         "**/.DS_Store",
         "corpus/",
-        "_kit/",
     ]
     open(os.path.join(BASE, ".gitignore"), "w", encoding="utf-8", newline="\n").write(
         "\n".join(lines) + "\n")
@@ -71,4 +73,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 

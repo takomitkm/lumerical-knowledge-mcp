@@ -250,7 +250,7 @@ ingest 3 块 → `{"inserted":3}`;`search?q=how to set mesh accuracy` → 正确
 
 ## 6e. 兼容层 v2(kit 规范版,2026-11-11)
 
-依据外部方法论文档 kit(AGENT_BRIEF + PHASE_PLAN + schema + 模板;**未随本仓库分发但为必需输入**——
+依据方法论文档 kit(AGENT_BRIEF + PHASE_PLAN + schema + 模板;**随本仓库分发于 `_kit/`,为必需输入**——
 `build_compat_registry.py` 缺它即报错停下,seed 提供 availability 外键引用的 source-history 行),
 **仍是 3 进程,无新端口**。集成点图:`COMPAT_INTEGRATION_MAP.md`。
 

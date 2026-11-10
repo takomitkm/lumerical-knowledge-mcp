@@ -1,0 +1,23 @@
+{
+  "validation_run_id": "validation.<implementation-id>.<timestamp>",
+  "implementation_id": "compat.<feature>.<target-version>.<variant>",
+  "target_id": "env.<product>.<solver>.<exact-version>.<build-or-capture-id>",
+  "test_suite_id": "tests.<feature>.<target-version>",
+  "test_method": "runtime",
+  "result": "blocked",
+  "run_at": "YYYY-MM-DDTHH:MM:SSZ",
+  "runner": "",
+  "execution_context": "Script File Editor / Script Prompt / Analysis Group",
+  "fixtures": [],
+  "reference_source": "",
+  "metrics": {
+    "absolute_tolerance": null,
+    "relative_tolerance": null,
+    "max_absolute_error": null,
+    "max_relative_error": null
+  },
+  "actual_outputs": [],
+  "errors": [],
+  "limitations": [],
+  "notes": "Use result=blocked if the target runtime/license was unavailable. Do not mark as passed based on static inspection."
+}

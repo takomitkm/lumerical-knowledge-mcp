@@ -1,0 +1,51 @@
+# Authoring template only. Runtime mapping/status belongs in SQLite.
+implementation_id: "compat.<feature>.<target-version>.<variant>"
+feature:
+  feature_id: "<stable-feature-id>"
+  canonical_name: "<official-feature-name>"
+target:
+  product: "FDTD"
+  solver: "FDTD"
+  version_label: "2024 R1"
+  update_label: null
+  build_number: null
+implementation:
+  kind: "backport" # native | adapter | backport | workaround
+  recipe_doc_id: "compat.<feature>.<target-version>.<variant>"
+  source_file: "implementation.lsf"
+  equivalence: "approximate" # exact | domain_equivalent | approximate | partial | unsupported
+  verification_level: "L0" # L0 | L1 | L2 | L3 | L4
+  status: "draft"
+contract:
+  purpose: ""
+  inputs: []
+  outputs: []
+  units: ""
+  coordinate_conventions: ""
+  normalization: ""
+  error_and_empty_input_behavior: ""
+preconditions: []
+assumptions: []
+dependencies:
+  - name: "<LSF command or primitive>"
+    type: "command" # command | keyword | operator | builtin_function | data_type | dataset_api | other
+    required: true
+    target_presence: "unknown"
+    evidence: []
+algorithm:
+  summary: ""
+  invariants: []
+  complexity: ""
+limitations: []
+tests:
+  test_suite_id: "tests.<feature>.<target-version>"
+  runtime_verified: false
+  differential_verified: false
+  fixtures: []
+  tolerances:
+    absolute: null
+    relative: null
+sources:
+  - source_id: "<official-doc-or-release-note-id>"
+    url: "https://..."
+notes: ""

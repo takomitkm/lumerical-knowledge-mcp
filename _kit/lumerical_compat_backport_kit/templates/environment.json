@@ -1,0 +1,13 @@
+{
+  "target_id": "env.<product>.<solver>.<exact-version>.<build-or-capture-id>",
+  "product": "FDTD",
+  "solver": "FDTD",
+  "version_label": "2024 R1",
+  "update_label": null,
+  "build_number": null,
+  "platform": "Windows 11",
+  "captured_at": "YYYY-MM-DDTHH:MM:SSZ",
+  "capture_method": "manual_target_runtime",
+  "license_available_for_test": false,
+  "notes": "Do not include license keys, usernames, private hostnames or tokens."
+}

@@ -4,17 +4,40 @@
 
 /*
 
+_kit/*
+!/_kit/
+_kit/lumerical_compat_backport_kit/*
+!/_kit/lumerical_compat_backport_kit/
+_kit/lumerical_compat_backport_kit/docs/*
+!/_kit/lumerical_compat_backport_kit/docs/
+_kit/lumerical_compat_backport_kit/schema/*
+!/_kit/lumerical_compat_backport_kit/schema/
+_kit/lumerical_compat_backport_kit/tasks/*
+!/_kit/lumerical_compat_backport_kit/tasks/
+_kit/lumerical_compat_backport_kit/templates/*
+!/_kit/lumerical_compat_backport_kit/templates/
 capabilities/*
+!/capabilities/
 capabilities/capture-kit/*
+!/capabilities/capture-kit/
 compat/*
+!/compat/
 compat/assets/*
+!/compat/assets/
 compat/assets/adddftmonitor_v241/*
+!/compat/assets/adddftmonitor_v241/
 compat/assets/median_sort_v241/*
+!/compat/assets/median_sort_v241/
 compat/assets/reportmeshstatistics_v241/*
+!/compat/assets/reportmeshstatistics_v241/
 compat/assets/resonance_fwhm_v241/*
+!/compat/assets/resonance_fwhm_v241/
 shim/*
+!/shim/
 shim/compat/*
+!/shim/compat/
 tests/*
+!/tests/
 
 # ---- whitelisted exact paths ----
 !/.gitignore
@@ -23,6 +46,22 @@ tests/*
 !/LICENSE
 !/PLAN.md
 !/README.md
+!/_kit/lumerical_compat_backport_kit/AGENT_BRIEF.md
+!/_kit/lumerical_compat_backport_kit/PACKAGE_MANIFEST.md
+!/_kit/lumerical_compat_backport_kit/README.md
+!/_kit/lumerical_compat_backport_kit/docs/BACKPORT_SOP.md
+!/_kit/lumerical_compat_backport_kit/docs/IMPLEMENTATION_SPEC.md
+!/_kit/lumerical_compat_backport_kit/docs/SOURCES_AND_CASES.md
+!/_kit/lumerical_compat_backport_kit/schema/compatibility.sql
+!/_kit/lumerical_compat_backport_kit/schema/evidence_seed.sql
+!/_kit/lumerical_compat_backport_kit/tasks/PHASE_PLAN.md
+!/_kit/lumerical_compat_backport_kit/templates/capability-snapshot.json
+!/_kit/lumerical_compat_backport_kit/templates/commands.json
+!/_kit/lumerical_compat_backport_kit/templates/environment.json
+!/_kit/lumerical_compat_backport_kit/templates/implementation.yaml
+!/_kit/lumerical_compat_backport_kit/templates/recipe.md
+!/_kit/lumerical_compat_backport_kit/templates/syntax-probes.json
+!/_kit/lumerical_compat_backport_kit/templates/test-report.json
 !/add_recipe.py
 !/build_chunks.py
 !/build_compat_assets.py
@@ -106,4 +145,3 @@ tests/*
 **/*.fsp
 **/.DS_Store
 corpus/
-_kit/

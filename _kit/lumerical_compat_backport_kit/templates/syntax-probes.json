@@ -1,0 +1,17 @@
+{
+  "snapshot_id": "snapshot.<target-id>.<timestamp>",
+  "probes": [
+    {
+      "probe_id": "probe.<construct-or-call>.<version>",
+      "symbol": "function",
+      "symbol_type": "keyword",
+      "probe_kind": "syntax_probe",
+      "probe_file": "probe_function.lsf",
+      "status": "not_run",
+      "result": null,
+      "error_text": null,
+      "captured_at": null,
+      "notes": "Probe one language construct/signature at a time. Do not infer from getcommands."
+    }
+  ]
+}
