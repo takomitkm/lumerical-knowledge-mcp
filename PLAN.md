@@ -13,7 +13,7 @@
 > - ✅ Phase 3 完成(08:35):抓 optics.ansys.com **2485 篇** → 切块 **13152 块**(12792 KB + 360 .lsf 片),
 >   全量入库,**零失败**,BM25 对齐 13152;重启后数据仍在、查询正常。
 > - ✅ Phase 4 完成(部分):`rag-query.ps1` 单文件查询器(延迟 ~0.74s);A/B 见 §6。
-> - ✅ Phase 5 完成:MCP 服务(`rag-mcp` :8901)已接 magpie(`library.json` 登记 `lumerical-rag`)→ dsh。
+> - ✅ Phase 5 完成:MCP 服务(`rag-mcp` :8901)已接 magpie(`library.json` 登记 `lumerical-knowledge-mcp`)→ dsh。
 > - ✅ **扩库完成**(08:5x):加入 Zemax 432 + Speos 45 → **2962 篇**。
 > - ✅ **GPU/HPC 补库(后又删)**(09:3x):按用户要求移除了那 38 篇 Lumerical GPU 文档(他用 fdtdx)。
 > - ✅ **版本对齐 + MCP 扩展**(10:4x):校机 v241 自带 `docs.json` → 新集合 `lumerical_v241`(743 块);
@@ -178,9 +178,9 @@ ingest 3 块 → `{"inserted":3}`;`search?q=how to set mesh accuracy` → 正确
   FastMCP streamable-http `0.0.0.0:8901/mcp`,工具 `search_lumerical_docs(query, top_k)`),薄封装调本机 shim。
   已验证:102 本地客户端 + 笔记本跨机客户端均握手成功并取回结果。
   在 **magpie `~/.config/magpie/library.json`** 的 `mcp` 数组登记
-  `{name:"lumerical-rag", transport:"http", url:"http://RAG_HOST:8901/mcp", agents:[...]}` 并加入
-  `applied.dsh.mcp`;dsh `cordis.patch.yml` 对应条目 `magpie-mcp-lumerical-rag`(与 `lumerical-lab` 同款)。
-  **重启 dsh / 新开会话**后生效,工具名 `mcp__lumerical-rag__search_lumerical_docs`。
+  `{name:"lumerical-knowledge-mcp", transport:"http", url:"http://RAG_HOST:8901/mcp", agents:[...]}` 并加入
+  `applied.dsh.mcp`;dsh `cordis.patch.yml` 对应条目 `magpie-mcp-lumerical-knowledge-mcp`(与 `lumerical-lab` 同款)。
+  **重启 dsh / 新开会话**后生效,工具名 `mcp__lumerical-knowledge-mcp__search_lumerical_docs`。
   (踩坑:mcp SDK 2.x 把 FastMCP 改名 MCPServer → 必须钉 `mcp<2`;客户端断开的 SSE 报错无害。)
 
 ## 6b. 独立集合 `fdtdx`(2026-11-10,用户用开源 fdtdx + JAX GPU)
@@ -196,7 +196,7 @@ ingest 3 块 → `{"inserted":3}`;`search?q=how to set mesh accuracy` → 正确
   `extract_fdtdx_api.py` + `filter_fdtdx_api.py`,删继承/无文档冗余 9566→581)→ **1202 块**
   (568 doc + 34 example + 19 paper + **581 api**);源文件 `corpus/fdtdx/`。
 - **校机访问(实测)**:校机 → `http://RAG_HOST:8901/mcp` 直连 OPEN,可 initialize/tools/list/tools/call;
-  已在 `~/.dsh/profiles/web/cordis.patch.yml` 加 `magpie-mcp-lumerical-rag`(备份 `.bak-lumericalrag-*`),
+  已在 `~/.dsh/profiles/web/cordis.patch.yml` 加 `magpie-mcp-lumerical-knowledge-mcp`(备份 `.bak-lumericalrag-*`),
   校机通过桌面 `DeepSeek Harness.lnk` 启动 dsh,下次启动即加载。
 - **查询**:`GET /search?collection=fdtdx`;MCP 工具 `search_lumerical_docs(..., collection="fdtdx")`。
   实测:`install fdtdx cuda` → README 安装段(0.994);`XLA_PYTHON_CLIENT_ALLOCATOR NCCL_PROTO`
@@ -354,7 +354,7 @@ systemctl --user daemon-reload
 (用户级,无需 sudo;不残留系统文件。)
 
 ## 10. 执行时才定稿的开放项
-1. ~~dsh 的 MCP 客户端配置~~ → ✅ **已做**:`rag-mcp`(:8901) + magpie `library.json` 登记 `lumerical-rag` → dsh(工具 `search_lumerical_docs`);
+1. ~~dsh 的 MCP 客户端配置~~ → ✅ **已做**:`rag-mcp`(:8901) + magpie `library.json` 登记 `lumerical-knowledge-mcp` → dsh(工具 `search_lumerical_docs`);
 2. ~~校机 python~~ → 校机 3.15 太新,docling 装本机(3.12);解析(lxml)也在本机跑;
 3. ~~chunker 参数~~ → 已定:结构优先切分(见 Phase 3),非定长;
 4. ~~swapfile~~ → **作废:无 sudo,不加**;Qdrant/shim 设 MemoryMax(700M/400M)兜底;
@@ -370,3 +370,4 @@ systemctl --user daemon-reload
 ---
 
 **审批点**:你确认本计划(或改任何一条),我就按 Phase 1→4 顺序执行,**每阶段跑完回报验证输出再进下一阶段**。
+

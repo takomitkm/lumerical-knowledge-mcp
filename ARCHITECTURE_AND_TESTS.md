@@ -63,7 +63,7 @@ Linger=yes
 
 ### 1.3 客户端接线
 
-- 笔记本 dsh:magpie `library.json` 登记 `lumerical-rag` → `http://RAG_HOST:8901/mcp` → `mcp__lumerical-rag__*`
+- 笔记本 dsh:magpie `library.json` 登记 `lumerical-knowledge-mcp` → `http://RAG_HOST:8901/mcp` → `mcp__lumerical-knowledge-mcp__*`
 - 校机 dsh:`cordis.patch.yml` 同 URL(备份 `…bak-lumericalrag-20261110-102446`)
 - CLI:`rag-query.ps1 "…" -Collection lumerical|fdtdx|lumerical_v241|lumerical_compat`
 - 裸 REST:`GET :8900/search?q=&collection=&doc_type=` + `Authorization: Bearer <token>`(token 在 102 `~/.config/rag/rag.env` 600 / 笔记本 `%USERPROFILE%\.rag\token`)
@@ -146,3 +146,4 @@ ingest_community_qanalysis.py  build_compat_db.py(旧实验,归档)
 - `json*` 等原生命令只验证了存在性+签名抽样,未逐条语义差分(官方语义即定义,价值有限)
 - R2 斜率法的纯 LSF 独立移植未完成(fftw 双边轴坑),差分用同算法数值实现完成;原脚本仍是参照
 - 校机 `lumcap/` 工作区保留(采集证据+L3 工程),<外部工程目录>/<外部工程目录> 只读探测过,时间戳核验未动
+
