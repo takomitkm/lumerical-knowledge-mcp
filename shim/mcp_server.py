@@ -10,7 +10,7 @@ SHIM = os.environ.get("RAG_INTERNAL", "http://127.0.0.1:8900").rstrip("/")
 TOKEN = os.environ["RAG_TOKEN"]
 DEFAULT_COLLECTION = os.environ.get("DEFAULT_COLLECTION", "lumerical")
 
-mcp = FastMCP("lumerical-rag", host="0.0.0.0", port=8901)
+mcp = FastMCP("lumerical-knowledge-mcp", host="0.0.0.0", port=8901)
 
 
 @mcp.tool()
@@ -188,3 +188,4 @@ def get_lumerical_compat_recipe(implementation_id: str) -> str:
 
 if __name__ == "__main__":
     mcp.run(transport="streamable-http")
+
